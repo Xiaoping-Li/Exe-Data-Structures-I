@@ -10,6 +10,10 @@ class Stack {
     this.tail = null;
     this.length = 0;
   }
+
+  get size() {
+    return this.length;
+  }
 }
 
 module.exports = Stack;
