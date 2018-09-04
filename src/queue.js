@@ -14,7 +14,20 @@ class Queue {
   get size() {
     return this.length;
   }
-  
+
+  enqueue(value) {
+    const item = {
+      value,
+      next: null,
+    };
+    if (!this.head) {
+      this.head = item;
+      this.tail = item;
+    } else {
+      this.tail.next = item;
+      this.tail = item;
+    }
+  }
 }
 
 module.exports = Queue;
