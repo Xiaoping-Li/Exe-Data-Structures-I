@@ -27,6 +27,7 @@ class Queue {
       this.tail.next = item;
       this.tail = item;
     }
+    this.length += 1;
   }
 
   dequeue() {
@@ -35,9 +36,11 @@ class Queue {
     if (!this.head.next) {
       this.head = null;
       this.tail = null;
+      this.length -= 1;
       return currentHead.value;
     }
     this.head = this.head.next;
+    this.length -= 1;
     return currentHead.value;
   }
 }
