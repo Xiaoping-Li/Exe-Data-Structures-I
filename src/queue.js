@@ -28,6 +28,18 @@ class Queue {
       this.tail = item;
     }
   }
+
+  dequeue() {
+    const currentHead = this.head;
+    if (!this.head) return null;
+    if (!this.head.next) {
+      this.head = null;
+      this.tail = null;
+      return currentHead.value;
+    }
+    this.head = this.head.next;
+    return currentHead.value;
+  }
 }
 
 module.exports = Queue;
