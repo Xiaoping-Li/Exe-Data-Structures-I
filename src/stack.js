@@ -30,6 +30,27 @@ class Stack {
       this.length += 1;
     }
   }
+
+  pop() {
+    const currentTail = this.tail;
+    let preTail = this.head;
+    if (!this.head) return null;
+    if (!this.head.next) {
+      this.head = null;
+      this.tail = null;
+      this.length -= 1;
+      return currentTail.value;
+    }
+
+    while (preTail.next.next) {
+      preTail = preTail.next;
+    }
+
+    preTail.next = null;
+    this.tail = preTail;
+    this.length -= 1;
+    return currentTail.value;
+  }
 }
 
 module.exports = Stack;
