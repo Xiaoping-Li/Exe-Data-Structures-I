@@ -14,6 +14,22 @@ class Stack {
   get size() {
     return this.length;
   }
+
+  push(value) {
+    const node = {
+      value,
+      next: null,
+    };
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+      this.length += 1;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
+      this.length += 1;
+    }
+  }
 }
 
 module.exports = Stack;
