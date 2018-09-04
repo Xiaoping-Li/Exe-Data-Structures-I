@@ -27,13 +27,13 @@ class LinkedList {
   removeHead() {
     if (!this.head) return null;
     const currentHead = this.head;
-    if (this.tail === currentHead) {
+    if (!this.head.next) {
       this.head = null;
       this.tail = null;
-      return currentHead;
+      return currentHead.value;
     }
-    this.head = currentHead.next;
-    return currentHead;
+    this.head = this.head.next;
+    return currentHead.value;
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
