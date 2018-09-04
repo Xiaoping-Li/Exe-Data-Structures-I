@@ -11,6 +11,9 @@ class Queue {
     this.length = 0;
   }
 
+  get size() {
+    return this.length;
+  }
   
 }
 
