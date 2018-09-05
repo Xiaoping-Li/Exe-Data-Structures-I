@@ -27,7 +27,7 @@ class HashTable {
   remove(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     let bucket = this.storage.get(index);
-    if (!bucket) return null;
+    if (!bucket) return undefined;
     bucket = bucket.filter(item => item[0] !== key);
     this.storage.set(index, bucket); 
   }
@@ -38,9 +38,9 @@ class HashTable {
   retrieve(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
-    if (!bucket) return null;
-    const match = bucket.filter(item => item[0] === index);
-    return match ? match[0][1] : null;
+    if (!bucket) return undefined;
+    const match = bucket.filter(item => item[0] === key)[0];
+    return match ? match[1] : undefined;
   }
 }
 
