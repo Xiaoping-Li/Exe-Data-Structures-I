@@ -14,8 +14,17 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-    const index = getIndexBelowMax(key, this.limit);
-    this.storage.set(index, value);
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (!bucket) {
+      this.storage.set(index, [[key, value]]);
+    } else {
+      let idxOfKeyValue = null;
+      bucket.forEach((item, index) => {
+        if (item[0] === key) idxOfKeyValue = index;
+      });
+      idxOfKeyValue ? bucket[idxOfKeyValue][1] = value : bucket.push([key, value]);
+    }  
   }
 
   // Removes the key, value pair from the hash table
