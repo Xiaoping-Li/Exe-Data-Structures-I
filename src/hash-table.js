@@ -20,7 +20,14 @@ class HashTable {
     });
   }
 
-  
+  // Check capacity is > or <= 75%
+  isCapacityFull() {
+    let taken = 0;
+    this.storage.each(bucket => {
+      if (bucket) taken++;
+    });
+    return taken / this.limit > 0.75;
+  }
 
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
