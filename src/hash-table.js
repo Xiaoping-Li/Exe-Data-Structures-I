@@ -15,16 +15,10 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const index = getIndexBelowMax(key.toString(), this.limit);
-    const bucket = this.storage.get(index);
-    if (!bucket) {
-      this.storage.set(index, [[key, value]]);
-    } else {
-      let idxOfKeyValue = null;
-      bucket.forEach((item, index) => {
-        if (item[0] === key) idxOfKeyValue = index;
-      });
-      idxOfKeyValue ? bucket[idxOfKeyValue][1] = value : bucket.push([key, value]);
-    }  
+    let bucket = this.storage.get(index) || [];
+    bucket = bucket.filter(item => item[0] !== key);
+    bucket.push([key, value]);
+    this.storage.set(index, bucket);  
   }
 
   // Removes the key, value pair from the hash table
