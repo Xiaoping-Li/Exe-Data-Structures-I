@@ -16,17 +16,17 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     oldStorage.each(bucket => {
       if (!bucket) return;
-      bucket.forEach(keyValue => this.storage.insert(keyValue[0], keyValue[1]));
+      bucket.forEach(keyValue => this.insert(keyValue[0], keyValue[1]));
     });
   }
 
-  // Check capacity is > or <= 75%
+  // Check capacity is >= or < 75%
   isCapacityFull() {
     let taken = 0;
     this.storage.each(bucket => {
       if (bucket) taken++;
     });
-    return taken / this.limit > 0.75;
+    return taken / this.limit >= 0.75;
   }
 
   // Adds the given key, value pair to the hash table
