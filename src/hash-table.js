@@ -9,6 +9,19 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
 
+  // Double hash-table's size when capacity > 75%
+  resize() {
+    this.limit *= 2;
+    const oldStorage = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldStorage.each(bucket => {
+      if (!bucket) return;
+      bucket.forEach(keyValue => this.storage.insert(keyValue[0], keyValue[1]));
+    });
+  }
+
+  
+
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
