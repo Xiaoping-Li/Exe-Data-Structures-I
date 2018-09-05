@@ -37,7 +37,11 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (!bucket) return null;
+    const match = bucket.filter(item => item[0] === index);
+    return match ? match[0][1] : null;
   }
 }
 
