@@ -34,6 +34,7 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    if (this.isCapacityFull()) this.resize(); 
     const index = getIndexBelowMax(key.toString(), this.limit);
     let bucket = this.storage.get(index) || [];
     bucket = bucket.filter(item => item[0] !== key);
