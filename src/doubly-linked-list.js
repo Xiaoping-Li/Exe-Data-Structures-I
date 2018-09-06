@@ -33,4 +33,20 @@ class DoublyLinkedList {
     newNode.prev = this.tail;
     this.tail = newNode;
   }
+
+  removeFromHead() {
+    if (!this.head) return null;
+    const currentHead = this.head;
+    if (!this.head.next) {
+      this.head = null;
+      this.tail = null;
+      return currentHead;
+    }
+    const nextHead = this.head.next;
+    this.head.next.prev = null;
+    this.head.next = null;
+    this.head = nextHead;
+    return currentHead;
+  }
+
 }
