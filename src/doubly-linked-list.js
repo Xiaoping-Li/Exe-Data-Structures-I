@@ -48,4 +48,19 @@ class DoublyLinkedList {
     this.head = nextHead;
     return currentHead;
   }
+
+  removeFromTail() {
+    if (!this.tail) return null;
+    const currentTail = this.tail;
+    if (!this.tail.prev) {
+      this.head = null;
+      this.tail = null;
+      return currentTail;
+    }
+    const prevTail = this.tail.prev;
+    this.tail.prev.next = null;
+    this.tail.prev = null;
+    this.tail = prevTail;
+    return currentTail;
+  }
 }
