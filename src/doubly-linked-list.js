@@ -122,4 +122,35 @@ class DoublyLinkedList {
       this.tail = node;
     }
   }
+
+  delete(node) {
+    // Empty list
+    if (!this.head) return;
+
+    // If it's a single node list
+    if (!this.head.next) {
+      this.head = null;
+      this.tail = null;
+    }
+
+    // If node is head, reset head
+    if (!node.prev) {
+      const nextHead = this.head.next;
+      this.head.next.prev = null;
+      this.head.next = null;
+      this.head = nextHead;
+    } else if (!node.next) {
+      // If node is tail, reset tail
+      const upTail = this.tail.prev;
+      this.tail.prev.next = null;
+      this.tail.prev = null;
+      this.tail = upTail;
+    } else {
+      // Node is neither head nor tail
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+      node.prev = null;
+      node.next = null;
+    }
+  }
 }
