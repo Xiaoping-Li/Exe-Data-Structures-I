@@ -93,4 +93,33 @@ class DoublyLinkedList {
       this.head = node;
     }
   }
+
+  moveToBack(node) {
+    // If node is alreay the tail
+    if (!node.next) return;
+
+    // If node is the head
+    if (!node.prev) {
+      // Reset head
+      const nextHead = this.head.next;
+      this.head.next.prev = null;
+      this.head.next = null;
+      this.head = nextHead;
+      // Reset Tail
+      this.tail.next = node;
+      node.prev = this.tail;
+      this.tail = node;
+    } else {
+      // Node is neither head or tail
+      // Move node out of chain
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+      node.prev = null;
+      node.next = null;
+      // Reset tail
+      this.tail.next = node;
+      node.prev = this.tail;
+      this.tail = node;
+    }
+  }
 }
