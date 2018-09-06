@@ -63,4 +63,34 @@ class DoublyLinkedList {
     this.tail = prevTail;
     return currentTail;
   }
+
+  moveToFront(node) {
+    // If node is alreay the head
+    if (!node.prev) return;
+
+    // If node is the tail
+    if (!node.next) {
+      // Reset tail after move node
+      const prevTail = this.tail.prev;
+      this.tail.prev.next = null;
+      this.tail.prev = null;
+      this.tail = prevTail;
+
+      // Reset moved node as the new head
+      this.head.prev = node;
+      node.next = this.head;
+      this.head = node;
+    } else {
+      // Node is neither head nor tail
+      // Connect node prev and next node
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+      node.prev = null;
+      node.next = null;
+      // Reset node as head
+      this.head.prev = node;
+      node.next = this.head;
+      this.head = node;
+    }
+  }
 }
