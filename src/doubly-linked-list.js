@@ -40,12 +40,12 @@ class DoublyLinkedList {
     if (!this.head.next) {
       this.head = null;
       this.tail = null;
-      return currentHead;
+    } else {
+      const nextHead = this.head.next;
+      this.head.next.prev = null;
+      this.head.next = null;
+      this.head = nextHead;
     }
-    const nextHead = this.head.next;
-    currentHead.next = null;
-    nextHead.prev = null;
-    this.head = nextHead;
     return currentHead;
   }
 
@@ -55,12 +55,12 @@ class DoublyLinkedList {
     if (!this.tail.prev) {
       this.head = null;
       this.tail = null;
-      return currentTail;
+    } else {
+      const prevTail = this.tail.prev;
+      this.tail.prev.next = null;
+      this.tail.prev = null;
+      this.tail = prevTail;
     }
-    const prevTail = this.tail.prev;
-    this.tail.prev.next = null;
-    this.tail.prev = null;
-    this.tail = prevTail;
     return currentTail;
   }
 
@@ -154,3 +154,5 @@ class DoublyLinkedList {
     }
   }
 }
+
+module.exports = DoublyLinkedList;
